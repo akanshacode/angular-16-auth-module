@@ -1,0 +1,66 @@
+<div class="login-form">
+    <h2>Login</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" formControlName="email" />
+        <div *ngIf="loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched" class="error-message">
+          Email is required.
+        </div>
+        <div *ngIf="loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched" class="error-message">
+          Invalid email format.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password" />
+        <div *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched" class="error-message">
+          Password is required.
+        </div>
+        <div *ngIf="loginForm.get('password')?.hasError('minlength') && loginForm.get('password')?.touched" class="error-message">
+          Password must be at least 6 characters long.
+        </div>
+      </div>
+      <div class="captcha">
+        <div class="spinner">
+            <label class="mb-0">
+                <input type="checkbox" #captchaCheckbox (click)="openSlider(sliderCaptcha)">
+                <span class="checkmark"><span>&nbsp;</span></span>
+            </label>
+        </div>
+        <div class="text">
+            I'm not a robot
+        </div>
+        <div class="logo">
+            <img src="../../../assets/images/recaptcha-project.png"/>
+            <p>reCAPTCHA</p>
+            <small>Privacy - Terms</small>
+        </div>
+    </div>
+    
+      <button type="submit" style="background-color: #007bff;">Login</button>
+      <div class="or-separator">OR</div>
+
+
+      <button type="button" (click)="loginWithGoogle()" class="google-sign-in-button">Login with Google</button>
+      <div class="signup-link">
+        Don't have an account? <a routerLink="/signup">Sign Up</a>
+      </div>
+    </form>
+
+  </div>
+  
+
+
+  <ng-template #sliderCaptcha let-modal>
+    <div class="slidercaptcha">
+        <div class="card-header-slider">
+            <span>Please complete security verification! 
+                <!-- <span style="float: right !important;"><button type="button" aria-label="Close" class="btn-close" (click)="closeAllPopup()">X</button></span> -->
+            </span>
+        </div>
+        <div class="card-body-slider">
+            <div id="sliderCap"></div>
+        </div>
+    </div>
+</ng-template>

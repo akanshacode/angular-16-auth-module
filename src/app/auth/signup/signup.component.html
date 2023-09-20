@@ -1,0 +1,79 @@
+<div class="signup-form">
+    <h2>Sign Up</h2>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" formControlName="name" />
+        <div *ngIf="signupForm.get('name')?.hasError('required') && signupForm.get('name')?.touched" class="error-message">
+          Name is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" formControlName="email" />
+        <!-- Display email validation messages -->
+        <div *ngIf="signupForm.get('email')?.hasError('required') && signupForm.get('email')?.touched" class="error-message">
+          Email is required.
+        </div>
+        <div *ngIf="signupForm.get('email')?.hasError('email') && signupForm.get('email')?.touched" class="error-message">
+          Invalid email format.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password" />
+        <!-- Display password validation messages -->
+        <div *ngIf="signupForm.get('password')?.hasError('required') && signupForm.get('password')?.touched" class="error-message">
+          Password is required.
+        </div>
+        <div *ngIf="signupForm.get('password')?.hasError('minlength') && signupForm.get('password')?.touched" class="error-message">
+          Password must be at least 6 characters long.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" id="confirmPassword" formControlName="confirmPassword" />
+        <!-- Display confirm password validation message -->
+        <div *ngIf="signupForm?.hasError('passwordMismatch') && signupForm.get('confirmPassword')?.touched" class="error-message">
+          Passwords do not match.
+        </div>
+      </div>
+      <div class="captcha">
+        <div class="spinner">
+            <label class="mb-0">
+                <input type="checkbox" #captchaCheckbox (click)="openSlider(sliderCaptcha)">
+                <span class="checkmark"><span>&nbsp;</span></span>
+            </label>
+        </div>
+        <div class="text">
+            I'm not a robot
+        </div>
+        <div class="logo">
+            <img src="../../../assets/images/recaptcha-project.png"/>
+            <p>reCAPTCHA</p>
+            <small>Privacy - Terms</small>
+        </div>
+    </div>
+      <button type="submit" style="background-color: #007bff;">Sign Up</button>
+      <div class="or-separator">OR</div>
+
+
+      <button type="button" (click)="signinWithGoogle()" class="google-sign-in-button">Sign up with Google</button>
+      <div class="signup-link">
+       Have an account? <a routerLink="/login">Log In</a>
+      </div>
+    </form>
+  </div>
+
+  <ng-template #sliderCaptcha let-modal>
+    <div class="slidercaptcha">
+        <div class="card-header-slider">
+            <span>Please complete security verification! 
+                <!-- <span style="float: right !important;"><button type="button" aria-label="Close" class="btn-close" (click)="closeAllPopup()">X</button></span> -->
+            </span>
+        </div>
+        <div class="card-body-slider">
+            <div id="sliderCap"></div>
+        </div>
+    </div>
+</ng-template>

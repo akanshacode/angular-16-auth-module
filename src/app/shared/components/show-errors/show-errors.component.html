@@ -1,0 +1,10 @@
+<!-- <ul *ngIf="shouldShowErrors()" style="padding:0px; margin-bottom: 0px;">
+    <li class="error_msg" *ngFor="let error of listOfErrors()">{{error}}</li>
+</ul> -->
+<ng-container *ngIf="control">
+    <!-- Only display errors if control is not null -->
+    <div *ngIf="shouldShowErrors()" class="error-message">
+      {{ listOfErrors() }}
+    </div>
+  </ng-container>
+  

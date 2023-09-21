@@ -12,8 +12,6 @@
   - [Login Component](#login-component)
   - [Signup Component](#signup-component)
 - [Folder Structure](#folder-structure)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Introduction
 
